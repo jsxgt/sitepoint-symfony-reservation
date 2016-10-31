@@ -60,5 +60,69 @@ class Reservation
     {
         return $this->id;
     }
-}
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->passengers = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
+    /**
+     * Set flight
+     *
+     * @param \ReservationBundle\Entity\Flight $flight
+     *
+     * @return Reservation
+     */
+    public function setFlight(\ReservationBundle\Entity\Flight $flight = null)
+    {
+        $this->flight = $flight;
+
+        return $this;
+    }
+
+    /**
+     * Get flight
+     *
+     * @return \ReservationBundle\Entity\Flight
+     */
+    public function getFlight()
+    {
+        return $this->flight;
+    }
+
+    /**
+     * Add passenger
+     *
+     * @param \ReservationBundle\Entity\Passenger $passenger
+     *
+     * @return Reservation
+     */
+    public function addPassenger(\ReservationBundle\Entity\Passenger $passenger)
+    {
+        $this->passengers[] = $passenger;
+
+        return $this;
+    }
+
+    /**
+     * Remove passenger
+     *
+     * @param \ReservationBundle\Entity\Passenger $passenger
+     */
+    public function removePassenger(\ReservationBundle\Entity\Passenger $passenger)
+    {
+        $this->passengers->removeElement($passenger);
+    }
+
+    /**
+     * Get passengers
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getPassengers()
+    {
+        return $this->passengers;
+    }
+}
