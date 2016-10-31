@@ -1,0 +1,14 @@
+reservation:
+    resource: "@ReservationBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+root:
+    path: /
+    defaults:
+        _controller: FrameworkBundle:Redirect:urlRedirect
+        path: /reservation
+        permanent: true
+
+fos_user:
+    resource: "@FOSUserBundle/Resources/config/routing/all.xml"

@@ -1,0 +1,23 @@
+.form-page{
+
+    .container{
+
+        &.form{
+            background: #FFFFFF;
+            margin-top: 35px;
+            padding: 25px;
+            border-radius: 5px;
+            position: relative;
+
+            .logout{
+                position: absolute;
+                top: 0px;
+                right: 0px;
+                font-size: 25px;
+                display: block;
+                margin-top: 25px;
+                margin-bottom: 10px;
+            }
+        }
+    }
+}

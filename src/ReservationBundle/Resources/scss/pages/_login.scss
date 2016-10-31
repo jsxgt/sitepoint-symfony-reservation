@@ -1,0 +1,30 @@
+.login-holder{
+    width: 500px;
+    height: 275px;
+    position: relative;
+    margin: auto;
+    margin-top: 25px;
+    border-radius: 5px;
+    padding: 25px;
+    background: #FFFFFF;
+    //border: 1px solid $brand-color;
+}
+
+.login-row{
+    margin-bottom: 15px;
+
+    label{
+        cursor: pointer;
+    }
+
+    input{
+        width: 100%;
+        display: block;
+        padding: 5px;
+
+        &[type="checkbox"]{
+            width: auto;
+            display: inline;
+        }
+    }
+}
