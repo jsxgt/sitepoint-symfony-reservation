@@ -1,0 +1,10 @@
+{#{% block _reservationbundle_reservation_passengers_widget %}#}
+    {#<ul class="passengers">#}
+        {#{% for passenger in form %}#}
+            {#<li class="passenger">#}
+                {#{{ form_widget(passenger) }}#}
+                {#{{ form_label(passenger) }}#}
+            {#</li>#}
+        {#{% endfor %}#}
+    {#</ul>#}
+{#{% endblock %}#}

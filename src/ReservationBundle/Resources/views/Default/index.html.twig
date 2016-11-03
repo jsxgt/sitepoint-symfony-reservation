@@ -1,7 +1,10 @@
+{% form_theme form '@Reservation/Default/form_theme.html.twig' %}
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="UTF-8" />
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <script src="{{ asset('bundles/reservation/js/scripts.js') }}"></script>
     <link href="{{ asset('bundles/reservation/css/style.css') }}" type="text/css" rel="stylesheet">
     <title>Reservation form</title>
 </head>
@@ -11,6 +14,24 @@
         <div class="form-holder">
             <h1>Reservation form</h1>
             <a href="{{ path('fos_user_security_logout') }}" class="logout" title="Log out"><span class="glyphicon glyphicon-log-out"></span></a>
+            {% for row in form %}
+                <div class="form-row {{ row.vars.name }}">
+                    {{ form_row(row) }}
+
+                    {% if row.vars.name == 'passengers' %}
+                        {% set passenger_form_string %}
+                            {% spaceless %}
+                                {{ render(controller('ReservationBundle:Default:addPassenger')) }}
+                            {% endspaceless %}
+                        {% endset %}
+                        <div class="passenger-form-holder"
+                             data-submit="{{ path('reservation_add_passenger') }}"
+                             data-form="{{ passenger_form_string|escape }}">
+                        </div>
+                        <button class="btn btn-primary passenger-add">Add passenger</button>
+                    {% endif %}
+                </div>
+            {% endfor %}
         </div>
     </div>
 </div>

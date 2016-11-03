@@ -1,0 +1,9 @@
+<div class="passenger-form">
+    {% for row in form %}
+        <div class="form-row {{ row.vars.name }}">
+            {{ form_row(row) }}
+        </div>
+    {% endfor %}
+    <div class="btn btn-primary submit-form">Submit</div>
+    <div class="btn btn-default close-form">Close</div>
+</div>

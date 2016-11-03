@@ -6465,3 +6465,38 @@ body {
     display: block;
     margin-top: 25px;
     margin-bottom: 10px; }
+  .form-page .container.form .form-row {
+    margin-bottom: 15px; }
+    .form-page .container.form .form-row > div > label {
+      display: block; }
+    .form-page .container.form .form-row input, .form-page .container.form .form-row select {
+      width: 100%;
+      padding: 3px;
+      display: block; }
+    .form-page .container.form .form-row select {
+      cursor: pointer; }
+    .form-page .container.form .form-row.passengers {
+      position: relative;
+      margin-bottom: 25px; }
+      .form-page .container.form .form-row.passengers #reservationbundle_reservation_passengers input {
+        visibility: hidden;
+        position: absolute; }
+        .form-page .container.form .form-row.passengers #reservationbundle_reservation_passengers input:checked + label {
+          background-color: #337AB7;
+          color: #FFFFFF; }
+      .form-page .container.form .form-row.passengers #reservationbundle_reservation_passengers label {
+        display: block;
+        padding: 9px;
+        border: 1px solid #337AB7;
+        cursor: pointer;
+        user-select: none; }
+      .form-page .container.form .form-row.passengers .passenger-form-holder {
+        border: 1px solid #337AB7;
+        padding: 15px;
+        display: none; }
+        .form-page .container.form .form-row.passengers .passenger-form-holder.open {
+          display: block; }
+          .form-page .container.form .form-row.passengers .passenger-form-holder.open + button {
+            display: none; }
+        .form-page .container.form .form-row.passengers .passenger-form-holder button {
+          margin-right: 15px; }

@@ -18,6 +18,76 @@
                 margin-top: 25px;
                 margin-bottom: 10px;
             }
+
+
+
+            .form-row{
+                margin-bottom: 15px;
+
+                & > div > label{
+                    display: block;
+                }
+
+                %inputs{
+                    width: 100%;
+                    padding: 3px;
+                    display: block;
+                }
+
+                input{
+                    @extend %inputs;
+                }
+
+                select{
+                    @extend %inputs;
+                    cursor: pointer;
+                }
+
+                &.passengers{
+                    position: relative;
+                    margin-bottom: 25px;
+
+                    #reservationbundle_reservation_passengers{
+
+                        input{
+                            visibility: hidden;
+                            position: absolute;
+
+                            &:checked + label{
+                                background-color: $brand-color;
+                                color: #FFFFFF;
+                            }
+                        }
+
+                        label{
+                            display: block;
+                            padding: 9px;
+                            border: 1px solid $brand-color;
+                            cursor: pointer;
+                            user-select: none;
+                        }
+                    }
+
+                    .passenger-form-holder{
+                        border: 1px solid $brand-color;
+                        padding: 15px;
+                        display: none;
+
+                        &.open{
+                            display: block;
+
+                            & + button{
+                                display: none;
+                            }
+                        }
+
+                        button{
+                            margin-right: 15px;
+                        }
+                    }
+                }
+            }
+
         }
     }
 }

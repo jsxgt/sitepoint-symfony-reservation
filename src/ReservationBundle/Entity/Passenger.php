@@ -3,6 +3,8 @@
 namespace ReservationBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use ReservationBundle\Validator\Constraints as ReservationAssert;
 
 /**
  * Passenger
@@ -32,6 +34,8 @@ class Passenger
      * @var string
      *
      * @ORM\Column(name="firstName", type="string", length=255)
+     *
+     * @Assert\NotBlank()
      */
     private $firstName;
 
@@ -39,6 +43,8 @@ class Passenger
      * @var string
      *
      * @ORM\Column(name="lastName", type="string", length=255)
+     *
+     * @Assert\NotBlank()
      */
     private $lastName;
 
@@ -46,6 +52,18 @@ class Passenger
      * @var string
      *
      * @ORM\Column(name="nin", type="string", length=9, unique=true)
+     *
+     * @Assert\NotBlank()
+     *
+     * @Assert\Regex(
+     *     pattern="/(?![DFIQUV])[A-Z](?![DFIOQUV])[A-Z]\d{6}[A-D]/",
+     *     message="This NIN is not in the proper format."
+     * )
+     *
+     * @ReservationAssert\UniqueNin(
+     *     registered_user = "This NIN has already been registered by you.",
+     *     registered_other = "This NIN has been registered by another user."
+     * )
     */
     private $nin;
 
@@ -184,5 +202,31 @@ class Passenger
     public function getUser()
     {
         return $this->user;
+    }
+
+    /**
+     * Get string for form label
+     *
+     * @return string
+     */
+    public function getLabelString(){
+        $return = array(
+            $this->firstName,
+            $this->lastName,
+            '(' . $this->nin . ')'
+        );
+
+        return implode(' ', $return);
+    }
+
+    /**
+     * Set field value by name
+     *
+     * @return Passenger
+     */
+    public function setFieldValue($name, $value){
+        $this->$name = $value;
+
+        return $this;
     }
 }

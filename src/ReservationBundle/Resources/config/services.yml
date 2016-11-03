@@ -1,4 +1,16 @@
 services:
-#    reservation.example:
-#        class: ReservationBundle\Example
-#        arguments: ["@service_id", "plain_value", %parameter%]
+
+    reservation.form.type.reservation:
+        class: ReservationBundle\Form\ReservationType
+        arguments:
+            - "@=service('security.token_storage').getToken().getUser()"
+        tags:
+            - { name: form.type }
+
+    reservation.validator.unique_nin:
+        class: ReservationBundle\Validator\Constraints\UniqueNinValidator
+        arguments:
+            entityManager: "@doctrine.orm.entity_manager"
+            user: "@=service('security.token_storage').getToken().getUser()"
+        tags:
+            - { name: validator.constraint_validator, alias: unique_nin }
