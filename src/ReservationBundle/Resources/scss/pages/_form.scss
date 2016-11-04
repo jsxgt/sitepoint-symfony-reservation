@@ -19,7 +19,10 @@
                 margin-bottom: 10px;
             }
 
-
+            h3.flight{
+                color: $brand-color;
+                margin-top: -9px;
+            }
 
             .form-row{
                 margin-bottom: 15px;
@@ -86,8 +89,72 @@
                         }
                     }
                 }
+
+                &.seats{
+                    display: none;
+                }
+
             }
 
+            .seats-form{
+
+                .seat{
+                    float: left;
+
+                    input{
+                        visibility: hidden;
+                        position: absolute;
+
+                        &:checked + label{
+                            color: #FFFFFF;
+                            background-color: #FF5500;
+                        }
+
+                        &.success:checked + label{
+                            background-color: $brand-color;
+
+                            &.extra-price{
+                                background-color: #FF0000;
+                            }
+                        }
+
+                        &:disabled + label{
+                            color: #FFFFFF;
+                            border: 1px solid $background-color;
+                            background-color: $background-color;
+                            cursor: not-allowed;
+                            opacity: 0.5;
+                        }
+                    }
+
+                    label{
+                        width: 50px;
+                        height: 50px;
+                        border: 1px solid $brand-color;
+                        padding-top: 15px;
+                        padding-bottom: 15px;
+                        text-align: center;
+                        cursor: pointer;
+                        margin-right: 15px;
+                        margin-bottom: 25px;
+                        transition: background-color, 0.5s;
+
+                        &.extra-price{
+                            border: 1px solid #FF0000;
+                        }
+                    }
+                }
+
+                .row-number{
+                    width: 50px;
+                    height: 50px;
+                    float: left;
+                    clear: left;
+                    line-height: 50px;
+                    font-size: 25px;
+                    font-weight: bold;
+                }
+            }
         }
     }
 }

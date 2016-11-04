@@ -6465,6 +6465,9 @@ body {
     display: block;
     margin-top: 25px;
     margin-bottom: 10px; }
+  .form-page .container.form h3.flight {
+    color: #337AB7;
+    margin-top: -9px; }
   .form-page .container.form .form-row {
     margin-bottom: 15px; }
     .form-page .container.form .form-row > div > label {
@@ -6500,3 +6503,44 @@ body {
             display: none; }
         .form-page .container.form .form-row.passengers .passenger-form-holder button {
           margin-right: 15px; }
+    .form-page .container.form .form-row.seats {
+      display: none; }
+  .form-page .container.form .seats-form .seat {
+    float: left; }
+    .form-page .container.form .seats-form .seat input {
+      visibility: hidden;
+      position: absolute; }
+      .form-page .container.form .seats-form .seat input:checked + label {
+        color: #FFFFFF;
+        background-color: #FF5500; }
+      .form-page .container.form .seats-form .seat input.success:checked + label {
+        background-color: #337AB7; }
+        .form-page .container.form .seats-form .seat input.success:checked + label.extra-price {
+          background-color: #FF0000; }
+      .form-page .container.form .seats-form .seat input:disabled + label {
+        color: #FFFFFF;
+        border: 1px solid #393939;
+        background-color: #393939;
+        cursor: not-allowed;
+        opacity: 0.5; }
+    .form-page .container.form .seats-form .seat label {
+      width: 50px;
+      height: 50px;
+      border: 1px solid #337AB7;
+      padding-top: 15px;
+      padding-bottom: 15px;
+      text-align: center;
+      cursor: pointer;
+      margin-right: 15px;
+      margin-bottom: 25px;
+      transition: background-color, 0.5s; }
+      .form-page .container.form .seats-form .seat label.extra-price {
+        border: 1px solid #FF0000; }
+  .form-page .container.form .seats-form .row-number {
+    width: 50px;
+    height: 50px;
+    float: left;
+    clear: left;
+    line-height: 50px;
+    font-size: 25px;
+    font-weight: bold; }

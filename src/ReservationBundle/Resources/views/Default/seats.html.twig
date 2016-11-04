@@ -1,0 +1,26 @@
+<div class="seats-form">
+    {% for seat, data in seats %}
+        {% if seat|slice(-1) == 'A' %}
+            <div class="row-number">{{ seat|slice(0, -1) }}</div>
+        {% endif %}
+        <div class="seat">
+            <input
+                    type="checkbox"
+                    id="seat_{{ seat }}"
+                    name="seats[]"
+                    value="{{ seat }}"
+                    {% if data.reserved is defined %}
+                        {% if app.user.id != data.reserved %} disabled="disabled"
+                        {% else %} checked="checked" class="success"{% endif %}
+                    {% endif %} />
+            <label
+                    for="seat_{{ seat }}"
+                    {% if data.price != 0 %}
+                    class="extra-price" title="This costs an extra {{ data.price }}"
+                    {% endif %}>
+                {{ seat }}
+            </label>
+        </div>
+    {% endfor %}
+</div>
+<div class="clearfix"></div>

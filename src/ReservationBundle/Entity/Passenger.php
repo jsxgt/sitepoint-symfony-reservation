@@ -218,15 +218,4 @@ class Passenger
 
         return implode(' ', $return);
     }
-
-    /**
-     * Set field value by name
-     *
-     * @return Passenger
-     */
-    public function setFieldValue($name, $value){
-        $this->$name = $value;
-
-        return $this;
-    }
 }

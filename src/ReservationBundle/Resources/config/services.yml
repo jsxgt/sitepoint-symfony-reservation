@@ -3,7 +3,8 @@ services:
     reservation.form.type.reservation:
         class: ReservationBundle\Form\ReservationType
         arguments:
-            - "@=service('security.token_storage').getToken().getUser()"
+            user: "@=service('security.token_storage').getToken().getUser()"
+            entityManager: "@doctrine.orm.entity_manager"
         tags:
             - { name: form.type }
 

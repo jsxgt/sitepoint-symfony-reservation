@@ -207,5 +207,38 @@ class Flight
 
         $this->seats = $seats;
     }
+
+    /**
+     * Seat a seat as reserved
+     *
+     * @return mixed
+     */
+    public function reserveSeat($seat, $userId){
+        if(isset($this->seats[$seat])){
+            if(!isset($this->seats[$seat]['reserved'])){
+                $this->seats[$seat]['reserved'] = $userId;
+                return true;
+            }else{
+                return false;
+            }
+        }else{
+            return null;
+        }
+    }
+
+    /**
+     * Seat a seat as unreserved
+     *
+     * @return void
+     */
+    public function unreserveSeat($seat){
+        if(isset($this->seats[$seat])){
+            unset($this->seats[$seat]['reserved']);
+        }
+    }
+
+    public function refreshSeats(){
+        $this->generateSeats();
+    }
 }
 

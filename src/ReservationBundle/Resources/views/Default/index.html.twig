@@ -13,6 +13,7 @@
     <div class="col-lg-12">
         <div class="form-holder">
             <h1>Reservation form</h1>
+            <h3 class="flight">Flight #{{ flight.number }} {{ flight.takeoff }} - {{ flight.landing }}</h3>
             <a href="{{ path('fos_user_security_logout') }}" class="logout" title="Log out"><span class="glyphicon glyphicon-log-out"></span></a>
             {% for row in form %}
                 <div class="form-row {{ row.vars.name }}">
@@ -29,8 +30,18 @@
                              data-form="{{ passenger_form_string|escape }}">
                         </div>
                         <button class="btn btn-primary passenger-add">Add passenger</button>
+                        <div class="btn btn-primary next-button">Next &raquo;</div>
                     {% endif %}
                 </div>
+                {% if row.vars.name == 'passengers' %}
+                    <div class="form-row seats">
+                        <label>Seats</label>
+                        <div class="seats-form-holder" data-submit="{{ path('reservation_update_seat', {flight: flight.number}) }}">
+                            {{ render(controller('ReservationBundle:Default:updateSeat', {flight: flight.number})) }}
+                        </div>
+                        <div class="btn btn-primary next-button">Next &raquo;</div>
+                    </div>
+                {% endif %}
             {% endfor %}
         </div>
     </div>

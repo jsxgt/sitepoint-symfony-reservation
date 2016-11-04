@@ -2,21 +2,28 @@
 
 namespace ReservationBundle\Form;
 
+use Doctrine\ORM\EntityManager;
+use ReservationBundle\Entity\Flight;
 use ReservationBundle\Entity\Passenger;
 use ReservationBundle\Entity\User;
+use ReservationBundle\Form\DataTransformer\FlightNumberTransformer;
 use ReservationBundle\Repository\PassengerRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\CallbackTransformer;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class ReservationType extends AbstractType
 {
     private $user;
+    private $em;
 
-    public function __construct(User $user)
+    public function __construct(User $user, EntityManager $entityManager)
     {
         $this->user = $user;
+        $this->em = $entityManager;
     }
 
     /**
@@ -37,7 +44,12 @@ class ReservationType extends AbstractType
                 },
                 'multiple' => true,
                 'expanded' => true
-            ));
+            ))
+            ->add('flight', HiddenType::class);
+
+        $builder
+            ->get('flight')
+            ->addModelTransformer(new FlightNumberTransformer($this->em));
     }
     
     /**
