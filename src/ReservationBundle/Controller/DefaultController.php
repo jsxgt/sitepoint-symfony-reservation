@@ -23,7 +23,7 @@ class DefaultController extends Controller
     /**
      * @Route("/")
      */
-    public function indexAction()
+    public function indexAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
 
@@ -31,15 +31,21 @@ class DefaultController extends Controller
 
         $flight = $flightRepository->findOneById(1);
 
-        $passenger = new Passenger();
-
-        $passengerForm = $this->createForm(PassengerType::class, $passenger);
-
         $reservation = new Reservation();
 
         $reservation->setFlight($flight);
 
         $reservationForm = $this->createForm(ReservationType::class, $reservation);
+
+        $reservationForm->handleRequest($request);
+
+        if($reservationForm->isSubmitted()) {
+
+            if ($reservationForm->isValid()) {
+
+                return new Response('Reserved! Price: ' . $reservation->getPrice());
+            }
+        }
 
         return $this->render(
             'ReservationBundle:Default:index.html.twig',

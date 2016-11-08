@@ -94,6 +94,14 @@
                     display: none;
                 }
 
+                &.baggages{
+                    display: none;
+
+                    .collection-rescue-add{
+                        margin-bottom: 25px;
+                    }
+                }
+
             }
 
             .seats-form{
@@ -155,6 +163,78 @@
                     font-weight: bold;
                 }
             }
+
+            .baggages{
+
+                & + .collection-actions{
+                    margin-bottom: 25px;
+                }
+
+                .baggage{
+                    float: left;
+                    margin-right: 25px;
+
+                    label{
+                        width: 70px;
+                        height: 90px;
+                        border: 5px solid $brand-color;
+                        border-radius: 5px;
+                        line-height: 80px;
+                        text-align: center;
+                        margin-top: 25px;
+                        cursor: pointer;
+                        position: relative;
+                        user-select: none;
+
+                        &.label-baggage-medium{
+                            width: 90px;
+                        }
+
+                        &.label-baggage-large{
+                            width: 120px;
+                        }
+
+                        &:before{
+                            width: 30px;
+                            height: 21px;
+                            content: ' ';
+                            border: 3px solid $brand-color;
+                            border-bottom: none;
+                            border-radius: 5px;
+                            position: absolute;
+                            top: -21px;
+                            left: 50%;
+                            margin-left: -15px;
+                        }
+                    }
+
+                    input{
+                        visibility: hidden;
+                        position: absolute;
+
+                        &:checked + label{
+                            color: #FFFFFF;
+                            background-color: $brand-color;
+                        }
+
+                        &:disabled + label{
+                            color: #FFFFFF;
+                            background-color: $background-color;
+                            cursor: not-allowed;
+                            opacity: 0.5;
+                            border: 5px solid $background-color;
+
+                            &:before{
+                                border: 3px solid $background-color;
+                            }
+                        }
+                    }
+                }
+            }
         }
+    }
+
+    &.submitted-form .container.form .form-row{
+        display: block;
     }
 }

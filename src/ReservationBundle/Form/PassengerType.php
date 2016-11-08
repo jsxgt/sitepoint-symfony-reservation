@@ -21,7 +21,7 @@ class PassengerType extends AbstractType
             ->add('nin', TextType::class)
             ->add('salutation', EntityType::class, array(
                 'class' => Salutation::class,
-                'choice_label' => 'salutation'
+                'choice_label' => 'salutation',
             ))
             ->add('firstName')
             ->add('lastName');

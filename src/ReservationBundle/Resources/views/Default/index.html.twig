@@ -1,20 +1,23 @@
-{% form_theme form '@Reservation/Default/form_theme.html.twig' %}
+{% form_theme form '@Reservation/Default/jquery.collection.html.twig' %}
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="UTF-8" />
     <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <script src="{{ asset('bundles/reservation/js/jquery.collection.js') }}"></script>
     <script src="{{ asset('bundles/reservation/js/scripts.js') }}"></script>
     <link href="{{ asset('bundles/reservation/css/style.css') }}" type="text/css" rel="stylesheet">
     <title>Reservation form</title>
 </head>
-<body class="form-page">
+<body class="form-page{% if form.vars.submitted %} submitted-form{% endif %}">
 <div class="container form">
     <div class="col-lg-12">
         <div class="form-holder">
             <h1>Reservation form</h1>
             <h3 class="flight">Flight #{{ flight.number }} {{ flight.takeoff }} - {{ flight.landing }}</h3>
             <a href="{{ path('fos_user_security_logout') }}" class="logout" title="Log out"><span class="glyphicon glyphicon-log-out"></span></a>
+            {{ form_start(form) }}
+            {{ form_errors(form) }}
             {% for row in form %}
                 <div class="form-row {{ row.vars.name }}">
                     {{ form_row(row) }}
@@ -32,10 +35,15 @@
                         <button class="btn btn-primary passenger-add">Add passenger</button>
                         <div class="btn btn-primary next-button">Next &raquo;</div>
                     {% endif %}
+
+                    {% if row.vars.name == 'baggages' %}
+                        <button type="submit" class="btn btn-primary btn-form-submit">Submit</button>
+                    {% endif %}
                 </div>
                 {% if row.vars.name == 'passengers' %}
                     <div class="form-row seats">
                         <label>Seats</label>
+                        {{ form_errors(form.flight) }}
                         <div class="seats-form-holder" data-submit="{{ path('reservation_update_seat', {flight: flight.number}) }}">
                             {{ render(controller('ReservationBundle:Default:updateSeat', {flight: flight.number})) }}
                         </div>
@@ -43,6 +51,7 @@
                     </div>
                 {% endif %}
             {% endfor %}
+            {{ form_end(form) }}
         </div>
     </div>
 </div>

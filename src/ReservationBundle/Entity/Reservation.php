@@ -3,17 +3,20 @@
 namespace ReservationBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use ReservationBundle\Validator\Constraints as ReservationAssert;
 
 /**
  * Reservation
  *
  * @ORM\Table(name="reservation")
  * @ORM\Entity(repositoryClass="ReservationBundle\Repository\ReservationRepository")
+ *
+ * @ReservationAssert\SubmitCheck()
  */
 class Reservation
 {
 
-    public static $baggageTypes = [
+    public $baggageTypes = [
         'small' => [
             'name' => 'Small cabin baggage',
             'price' => 0
@@ -27,6 +30,8 @@ class Reservation
             'price' => 25
         ]
     ];
+
+    public $pricePerPassenger = 100;
 
     /**
      * @var int
@@ -50,6 +55,13 @@ class Reservation
      * @ORM\JoinTable(name="reservations_passengers")
      */
     private $passengers;
+
+    /**
+     * @var array
+     *
+     * @ORM\Column(name="baggages", type="simple_array")
+     */
+    private $baggages;
 
     /**
      * Get id
@@ -124,5 +136,52 @@ class Reservation
     public function getPassengers()
     {
         return $this->passengers;
+    }
+
+    /**
+     * Set baggages
+     *
+     * @param array $baggages
+     *
+     * @return Reservation
+     */
+    public function setBaggages($baggages)
+    {
+        $this->baggages = $baggages;
+
+        return $this;
+    }
+
+    /**
+     * Get baggages
+     *
+     * @return array
+     */
+    public function getBaggages()
+    {
+        return $this->baggages;
+    }
+
+    /**
+     * Get price
+     *
+     * @return int
+     */
+    public function getPrice(){
+        $price = count($this->passengers) * $this->pricePerPassenger;
+
+        foreach($this->baggages as $baggage){
+            $price = $price + $this->baggageTypes[$baggage]['price'];
+        }
+
+        if(count($this->passengers) > 0){
+            $passenger = $this->passengers->get(0);
+            $user = $passenger->getUser();
+            foreach($this->flight->getUserSeats($user->getId()) as $seat){
+                $price = $price + $seat['price'];
+            }
+        }
+
+        return $price;
     }
 }

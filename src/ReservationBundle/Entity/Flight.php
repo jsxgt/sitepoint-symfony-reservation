@@ -226,6 +226,27 @@ class Flight
         }
     }
 
+
+    /**
+     * Get seats reserved by user
+     *
+     * @param $user_id
+     * @return array
+     */
+    public function getUserSeats($user_id){
+        $seats = array();
+
+        foreach($this->seats as $seat){
+            if(isset($seat['reserved'])){
+                if($seat['reserved'] == $user_id){
+                    $seats[] = $seat;
+                }
+            }
+        }
+
+        return $seats;
+    }
+
     /**
      * Seat a seat as unreserved
      *

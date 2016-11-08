@@ -1,0 +1,64 @@
+{#
+# jquery.collection.html.twig
+#
+# Adds the following html attributes to the root node of your collection fields:
+#
+# - data-prototype-name: placeholder used in the prototype to replace element indexes on the collection
+# - data-allow-add: if set to false, plugin will automatically set allow_add option to false
+# - data-allow-delete: if set to false, plugin will automatically set allow_remove option to false
+# - data-name-prefix: contains the collection's prefix used in descendant field names
+#
+# Those information let you configure the plugin options automatically.
+#
+# If you are already using a form theme, you can use both by using:
+# {%
+#   form_theme myForm
+#       'FuzAppBundle::my-form-theme.html.twig'
+#       'FuzAppBundle::jquery.collection.html.twig'
+#       ...
+# %}
+#}
+
+
+
+{% block collection_widget %}
+    {% spaceless %}
+        {% if prototype is defined %}
+            {% set attr = attr|merge({'data-prototype': form_row(prototype)}) %}
+            {% set attr = attr|merge({'data-prototype-name': prototype.vars.name}) %}
+        {% endif %}
+        {% set attr = attr|merge({'data-allow-add': allow_add ? 1 : 0}) %}
+        {% set attr = attr|merge({'data-allow-remove': allow_delete ? 1 : 0 }) %}
+        {% set attr = attr|merge({'data-name-prefix': full_name}) %}
+        {{ block('form_widget') }}
+    {% endspaceless %}
+{% endblock collection_widget %}
+
+{% block _reservationbundle_reservation_baggages_entry_widget %}
+    <div class="baggages" id="{{ form.vars.id }}">
+        {% set entity_form = form.parent.parent %}
+        {% set entity = entity_form.vars.data %}
+        {% for baggage_type in form %}
+            {% set baggage_data = attribute(entity.baggageTypes, baggage_type.vars.value) %}
+            <div class="baggage" data-price="{{ baggage_data.price }}">
+                {{- form_widget(baggage_type) -}}
+                {{- form_label(baggage_type) -}}
+            </div>
+        {% endfor %}
+        <div class="clearfix"></div>
+    </div>
+{% endblock %}
+
+{% block _reservationbundle_reservation_baggages_entry_entry_label %}
+    {% set entity_form = form.parent.parent.parent %}
+    {% set entity = entity_form.vars.data %}
+    {% set baggage_data = attribute(entity.baggageTypes, value) %}
+    {% set label_attr = label_attr|merge({'class': 'label-baggage label-baggage-' ~ value}) %}
+    {% set label_attr = label_attr|merge({'title': baggage_data.name}) %}
+    {% if baggage_data.price == 0 %}
+        {% set label = 'Free' %}
+    {% else %}
+        {% set label = '+ ' ~ baggage_data.price %}
+    {% endif %}
+    {{ block('form_label') }}
+{% endblock %}

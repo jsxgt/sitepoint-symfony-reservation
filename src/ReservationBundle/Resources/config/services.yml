@@ -15,3 +15,10 @@ services:
             user: "@=service('security.token_storage').getToken().getUser()"
         tags:
             - { name: validator.constraint_validator, alias: unique_nin }
+
+    reservation.validator.submit_check:
+        class: ReservationBundle\Validator\Constraints\SubmitCheckValidator
+        arguments:
+            user: "@=service('security.token_storage').getToken().getUser()"
+        tags:
+            - { name: validator.constraint_validator, alias: submit_check }
