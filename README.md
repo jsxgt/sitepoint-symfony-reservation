@@ -19,3 +19,7 @@ This repository includes everything needed to get an install with samples runnin
 This also has an install script for Linux and maybe Mac. For Windows users, refer to the setup.sh script and run the corresponding commands for Windows.
 
 All you need to do is clone or download it to your hard drive, do a _chmod +x setup.sh_ and then run the setup with _./setup.sh_. It will prompt you for the database credentials, set the database schema and add samples.
+
+**Login details**
+
+There are a couple of accounts set up for you after installing. The usernames are john.smith and jane.smith, both with "password" as the password.
